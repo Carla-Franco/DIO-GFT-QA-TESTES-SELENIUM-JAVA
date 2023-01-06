@@ -6,4 +6,5 @@
 ### * Utilização da class WebDriverWait;
 ### * Utilização da class Select;
 ### * Validação de caminhos infelizes;
+### * Deleção de conta e validação da deleção;
 ### * Refatoração do código.
