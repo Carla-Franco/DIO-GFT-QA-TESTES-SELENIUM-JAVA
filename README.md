@@ -1,2 +1,9 @@
-# DIO-GFT-QA-TESTES-SELENIUM-JAVA
-Testes executados usando Selenium WebDriver e Java
+# Projeto de Automação de Testes com Selenium WebDriver e Java
+
+### * Uso de locators;
+### * Criação de class BasePage;
+### * Utilização da class Actions;
+### * Utilização da class WebDriverWait;
+### * Utilização da class Select;
+### * Validação de caminhos infelizes;
+### * Refatoração do código.
