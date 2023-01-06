@@ -2,12 +2,16 @@ package qa.carla.automation.pratice.selenium.tests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import qa.carla.automation.pratice.selenium.pages.RegisterPage;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RegisterPageTest {
 	private RegisterPage registerPage;
 	private final String URL = "https://automationexercise.com";
@@ -22,20 +26,22 @@ class RegisterPageTest {
 	void exit() throws Exception {
 		this.registerPage.quitWebDriver();
 	}
-
-	//@Test
+    
+	@Order(1)
+	@Test
 	void acessRegister() {
 		//when
 		this.registerPage.insertEmailToRegister();
 		
 		//then
-		String expected = "kscorito@gmail.com";
+		String expected = "roncarcla@yahoo.com.br";
 		String actual = this.registerPage.getEmailNewAccount();
 		assertEquals(expected, actual);
 	}
 	
-	//@Test
-	void registerIsValid() {
+	@Order(3)
+	@Test
+	void registerValid() {
 		//when
 		this.registerPage.fillOutForm();
 		
@@ -47,6 +53,7 @@ class RegisterPageTest {
 		assertFalse(this.URL.equals(this.registerPage.getCurrentUrl()));
 	}
 	
+	@Order(4)
 	@Test
 	void registerExistentInBase() {
 		//when
@@ -56,6 +63,7 @@ class RegisterPageTest {
 		assertEquals("Email Address already exist!", this.registerPage.getMyLoginExistentMessage());
 	}
 	
+	@Order(2)
 	@Test
 	void registerInvalid() {
 		//when
@@ -64,6 +72,18 @@ class RegisterPageTest {
 		//then
 		assertFalse(this.URL.equals(this.registerPage.getCurrentUrl()));
 	
+	}
+	
+	@Order(5)
+	@Test
+	void deleteAccountValid() {
+		//when
+		this.registerPage.deleteAccount();
+		this.registerPage.visit("https://automationexercise.com/delete_account");
+		
+		//then
+		assertEquals("ACCOUNT DELETED!", this.registerPage.getDeleteMessage());
+		assertFalse(this.URL.equals(this.registerPage.getCurrentUrl()));
 	}
 
 }

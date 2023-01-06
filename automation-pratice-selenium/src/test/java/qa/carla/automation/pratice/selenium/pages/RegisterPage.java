@@ -11,6 +11,12 @@ public class RegisterPage extends BasePage {
 	private By emailLocator = By.id("email");
 	private By alertAdditionalInformationLocator = By.xpath("//span[contains(., '(Street address, P.O. Box, Company name, etc.)')]");
 	private By messageLoginExistentLocator = By.xpath("//*[@id='form']/div/div/div[3]/div/form/p");
+	private By emailLoginLocator = By.xpath("//*[@id='form']/div/div/div[1]/div/form/input[2]");
+	private By passwordLoginLocator = By.xpath("//*[@id='form']/div/div/div[1]/div/form/input[3]");
+	private By submitBtnLoginLocator = By.xpath("//button[contains(., 'Login')]");
+	private By deleteAccountLocator = By.xpath("//*[@id='header']/div/div/div/div[2]/div/ul/li[5]/a");
+	private By messageDeleteAccountLocator = By.xpath("//b[contains(., 'Account Deleted!')]");
+	
 	
 	//Locators you personal information
 	private By genderFemaleLocator = By.id("id_gender2");
@@ -40,7 +46,7 @@ public class RegisterPage extends BasePage {
 		if(super.isDisplayed(signupLocator)) {
 			super.click(signupLocator);
 			super.type("Carla Franco", nameLocator);
-			super.type("kscorito@gmail.com", emailAddressLocator);
+			super.type("roncarcla@yahoo.com.br", emailAddressLocator);
 			super.click(submitBtnLocator);	
 		} else {
 			System.out.println("Campo para informar email não encontrado!");
@@ -90,16 +96,32 @@ public class RegisterPage extends BasePage {
 	}
 	
 	public String getMyLoginExistentMessage() {
+		super.waitVisibilityOfElementLocated(messageLoginExistentLocator);
 		return super.getText(messageLoginExistentLocator);
 	}
 	
 	public void fillOutFormInvalid() {
 		super.click(signupLocator);
 		super.type("Carla Franco", nameLocator);
-		super.type("cacarfranco09_embu0z@kindle.com", emailAddressLocator);
+		super.type("roncarcla@yahoo.com.br", emailAddressLocator);
 		super.click(submitBtnLocator);	
 		super.click(registerBtnLocator);	
 		super.waitVisibilityOfElementLocated(registerBtnLocator);
 	}
+	
+	public void deleteAccount() {
+		super.click(signupLocator);
+		super.type("roncarcla@yahoo.com.br", emailLoginLocator);
+		super.type("123456", passwordLoginLocator);
+		super.click(submitBtnLoginLocator);
+		super.click(deleteAccountLocator);		
+	}
+	
+	public String getDeleteMessage() {
+		super.waitVisibilityOfElementLocated(messageDeleteAccountLocator);
+		return super.getText(messageDeleteAccountLocator);
+		
+	}
+	
 
 }
